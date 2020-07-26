@@ -45,17 +45,17 @@
                 <tbody>
                 <tr th:each="todo : ${todos}">
                     <th scope="row" th:text=${todo.id}></th>
-                    <td th:text=${todo.todoItem}></td>
+                    <td th:text=${todo.text}></td>
                     <td th:text=${todo.completed}></td>
                     <td>
-                        <form th:action="@{/todoUpdate/{id}(id=${todo.id})}" method="POST" enctype="multipart/form-data">
+                        <form th:action="@{/todosPut/{id}(id=${todo.id})}" method="post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-sm text-white">Update</button>
+                                <button type="submit" class="btn btn-success btn-sm text-white">Change status</button>
                             </div>
                         </form>
                     </td>
                     <td>
-                        <form th:action="@{/todoDelete/{id}(id=${todo.id})}" method="POST" enctype="multipart/form-data">
+                        <form th:action="@{/todosDel/{id}(id=${todo.id})}" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <button type="submit" class="btn btn-danger btn-sm text-white">Delete</button>
                             </div>
@@ -82,14 +82,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/todoNew}" method="POST" enctype="multipart/form-data">
+                    <form th:action="@{/todos}" th:method="post" th:object="${todo}" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Todo</label>
-                            <input type="text" class="form-control" name="todoItem" aria-describedby="emailHelp" placeholder="Enter Todo">
+                            <label for="text">Todo</label>
+                            <input type="text" class="form-control" name="text" aria-describedby="emailHelp" placeholder="Enter Todo">
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Status</label>
-                            <select class="form-control" name="status">
+                            <label for="completed">Status</label>
+                            <select class="form-control" name="completed">
                                 <option>Yes</option>
                                 <option>No</option>
                             </select>
